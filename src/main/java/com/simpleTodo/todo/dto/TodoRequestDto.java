@@ -1,14 +1,13 @@
 package com.simpleTodo.todo.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+@Setter
 @Getter
-@AllArgsConstructor
 public class TodoRequestDto {
 
     @Min(value = 1, message = "우선순위는 최소 1 입니다.")

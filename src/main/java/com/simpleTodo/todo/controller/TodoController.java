@@ -26,7 +26,7 @@ public class TodoController {
     @PostMapping
     @Operation(summary = "todo를 생성하는 API")
     public ResponseEntity<TodoResponseDto> createTodo(
-            TodoRequestDto todoRequestDto,
+            @RequestBody @Valid TodoRequestDto todoRequestDto,
             @Parameter(hidden = true) @AuthenticationPrincipal MemberDetailsImpl memberDetails
     ) {
         return ResponseEntity.ok(todoService.createTodo(memberDetails.getUsername(), todoRequestDto));
@@ -45,7 +45,7 @@ public class TodoController {
     public ResponseEntity<TodoResponseDto> updateTodo(
             @Parameter(hidden = true) @AuthenticationPrincipal MemberDetailsImpl memberDetails,
             @PathVariable Long todoId,
-            @Valid TodoRequestDto todoRequestDto
+            @RequestBody @Valid TodoRequestDto todoRequestDto
     ) {
         return ResponseEntity.ok(todoService.updateTodo(memberDetails.getUsername(), todoId, todoRequestDto));
     }
