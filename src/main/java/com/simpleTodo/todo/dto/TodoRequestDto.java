@@ -6,7 +6,6 @@ import lombok.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
-@Setter
 @Getter
 public class TodoRequestDto {
 

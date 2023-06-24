@@ -1,11 +1,9 @@
 package com.simpleTodo.todo.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.simpleTodo.common.entity.Member;
 import com.simpleTodo.common.entity.Todo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
