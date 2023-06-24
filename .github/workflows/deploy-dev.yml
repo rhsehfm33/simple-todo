@@ -39,11 +39,8 @@ jobs:
 
       - name: Set up application.properties & profile
         run: |
-          touch ./scripts/spring_env; \
-          echo "${{ secrets.SPRING_SERVER_DEV_ENV }}" > ./scripts/spring_env; \
-          touch ./src/main/resources/application-server-dev.properties; \
-          echo "${{ secrets.APPLICATION_SERVER_DEV }}" > ./src/main/resources/application-server-dev.properties; \
-          cat ./src/main/resources/application.properties;
+          touch ./src/main/resources/application.properties; \
+          echo "${{ secrets.APPLICATION_SERVER_DEV }}" > ./src/main/resources/application.properties; \
 
       - name: Run chmod to make gradlew executable
         run: chmod +x ./gradlew
