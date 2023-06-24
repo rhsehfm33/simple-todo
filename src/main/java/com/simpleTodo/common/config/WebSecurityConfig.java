@@ -59,6 +59,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
         http.authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                .antMatchers(HttpMethod.GET, "/api/members/member-name/duplicate").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/members/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/members/signup").permitAll()
                 .anyRequest().authenticated()
