@@ -47,7 +47,7 @@ public class TodoResponseDto {
                 .authorName(member.getMemberName())
                 .title(todo.getTitle())
                 .subTitle(todo.getSubTitle())
-                .content(todo.getSubTitle())
+                .content(todo.getContent())
                 .checked(todo.getChecked())
                 .createdAt(todo.getCreatedAt())
                 .modifiedAt(todo.getModifiedAt())
