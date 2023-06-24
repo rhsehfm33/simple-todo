@@ -26,6 +26,6 @@ public class TodoRequestDto {
     private String content;
 
     @Schema(example = "true")
-    private boolean checked;
+    private Boolean checked;
 
 }

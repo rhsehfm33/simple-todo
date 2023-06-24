@@ -34,7 +34,7 @@ public class TodoResponseDto {
     private String content;
 
     @Schema(example = "true")
-    private boolean checked;
+    private Boolean checked;
 
     private LocalDateTime createdAt;
 
@@ -48,7 +48,7 @@ public class TodoResponseDto {
                 .title(todo.getTitle())
                 .subTitle(todo.getSubTitle())
                 .content(todo.getSubTitle())
-                .checked(todo.isChecked())
+                .checked(todo.getChecked())
                 .createdAt(todo.getCreatedAt())
                 .modifiedAt(todo.getModifiedAt())
                 .build();

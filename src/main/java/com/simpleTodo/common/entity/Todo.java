@@ -33,7 +33,7 @@ public class Todo extends Timestamped {
     private String content;
 
     @Column(name = "is_checked", nullable = false)
-    private boolean checked;
+    private Boolean checked;
 
     public static Todo create(Member member, TodoRequestDto todoRequestDto) {
         return Todo.builder()
@@ -42,7 +42,7 @@ public class Todo extends Timestamped {
                 .title(todoRequestDto.getTitle())
                 .subTitle(todoRequestDto.getSubTitle())
                 .content(todoRequestDto.getContent())
-                .checked(todoRequestDto.isChecked())
+                .checked(todoRequestDto.getChecked())
                 .build();
     }
 
@@ -51,7 +51,7 @@ public class Todo extends Timestamped {
         this.title = todoRequestDto.getTitle();
         this.subTitle = todoRequestDto.getSubTitle();
         this.content = todoRequestDto.getContent();
-        this.checked = todoRequestDto.isChecked();
+        this.checked = todoRequestDto.getChecked();
     }
 
 }
