@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -29,6 +30,10 @@ public class MemberResponseDto extends Timestamped {
 
     private LocalDate birthday;
 
+    private LocalDateTime createdAt;
+
+    private LocalDateTime modifiedAt;
+
     public static MemberResponseDto create(Member member) {
         return MemberResponseDto.builder()
                 .id(member.getId())
@@ -36,6 +41,8 @@ public class MemberResponseDto extends Timestamped {
                 .nickName(member.getNickName())
                 .email(member.getEmail())
                 .birthday(member.getBirthday())
+                .createdAt(member.getCreatedAt())
+                .modifiedAt(member.getModifiedAt())
                 .build();
     }
 
