@@ -18,8 +18,7 @@ public class TodoRequestDto {
     @Schema(example = "내용")
     private String content;
 
-    @JsonProperty("isChecked")
     @Schema(example = "true")
-    private boolean isChecked;
+    private boolean checked;
 
 }

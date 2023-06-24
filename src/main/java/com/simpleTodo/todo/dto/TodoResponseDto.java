@@ -29,9 +29,8 @@ public class TodoResponseDto {
     @Schema(example = "내용")
     private String content;
 
-    @JsonProperty("isChecked")
     @Schema(example = "true")
-    private boolean isChecked;
+    private boolean checked;
 
     private LocalDateTime createdAt;
 
@@ -44,7 +43,7 @@ public class TodoResponseDto {
                 .title(todo.getTitle())
                 .subTitle(todo.getSubTitle())
                 .content(todo.getSubTitle())
-                .isChecked(todo.isChecked())
+                .checked(todo.isChecked())
                 .createdAt(todo.getCreatedAt())
                 .modifiedAt(todo.getModifiedAt())
                 .build();
