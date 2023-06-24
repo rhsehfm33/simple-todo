@@ -29,7 +29,7 @@ public class TodoService {
                 () -> new EntityNotFoundException(ErrorMessage.MEMBER_ACCESS_DENIED.getMessage())
         );
 
-        Todo newTodo = Todo.create(member, todoRequestDto);
+        Todo newTodo = todoRepository.save(Todo.create(member, todoRequestDto));
 
         return TodoResponseDto.create(member, newTodo);
     }
