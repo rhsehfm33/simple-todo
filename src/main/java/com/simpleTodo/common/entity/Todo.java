@@ -16,6 +16,9 @@ public class Todo extends Timestamped {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "priority", nullable = false)
+    private Integer priority;
+
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
@@ -35,6 +38,7 @@ public class Todo extends Timestamped {
     public static Todo create(Member member, TodoRequestDto todoRequestDto) {
         return Todo.builder()
                 .member(member)
+                .priority(todoRequestDto.getPriority())
                 .title(todoRequestDto.getTitle())
                 .subTitle(todoRequestDto.getSubTitle())
                 .content(todoRequestDto.getContent())
@@ -43,6 +47,7 @@ public class Todo extends Timestamped {
     }
 
     public void update(TodoRequestDto todoRequestDto) {
+        this.priority = todoRequestDto.getPriority();
         this.title = todoRequestDto.getTitle();
         this.subTitle = todoRequestDto.getSubTitle();
         this.content = todoRequestDto.getContent();

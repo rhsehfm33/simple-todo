@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Tag(name = "Todo API")
@@ -44,7 +45,7 @@ public class TodoController {
     public ResponseEntity<TodoResponseDto> updateTodo(
             @Parameter(hidden = true) @AuthenticationPrincipal MemberDetailsImpl memberDetails,
             @PathVariable Long todoId,
-            TodoRequestDto todoRequestDto
+            @Valid TodoRequestDto todoRequestDto
     ) {
         return ResponseEntity.ok(todoService.updateTodo(memberDetails.getUsername(), todoId, todoRequestDto));
     }

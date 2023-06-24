@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface TodoRepository extends JpaRepository<Todo, Long> {
 
-    List<Todo> findAllByMember(Member member);
+    List<Todo> findAllByMemberOrderByPriorityDesc(Member member);
 
     Optional<Todo> findByIdAndMember(Long todoId, Member member);
 

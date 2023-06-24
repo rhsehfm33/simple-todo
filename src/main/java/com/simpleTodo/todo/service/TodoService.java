@@ -40,7 +40,7 @@ public class TodoService {
                 () -> new EntityNotFoundException(ErrorMessage.MEMBER_ACCESS_DENIED.getMessage())
         );
 
-        List<TodoResponseDto> todoResponseDtos = todoRepository.findAllByMember(member).stream()
+        List<TodoResponseDto> todoResponseDtos = todoRepository.findAllByMemberOrderByPriorityDesc(member).stream()
                 .map(todo -> TodoResponseDto.create(member, todo))
                 .collect(Collectors.toList());
 

@@ -5,9 +5,12 @@ import com.simpleTodo.common.entity.Member;
 import com.simpleTodo.common.entity.Todo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,6 +19,9 @@ public class TodoResponseDto {
 
     @Schema(example="12")
     private Long todoId;
+
+    @Schema(example = "5")
+    private Integer priority;
 
     @Schema(example = "user123")
     private String authorName;
@@ -39,6 +45,7 @@ public class TodoResponseDto {
     public static TodoResponseDto create(Member member, Todo todo) {
         return TodoResponseDto.builder()
                 .todoId(todo.getId())
+                .priority(todo.getPriority())
                 .authorName(member.getMemberName())
                 .title(todo.getTitle())
                 .subTitle(todo.getSubTitle())
