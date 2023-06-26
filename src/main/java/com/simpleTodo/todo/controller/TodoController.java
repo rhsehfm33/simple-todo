@@ -32,6 +32,15 @@ public class TodoController {
         return ResponseEntity.ok(todoService.createTodo(memberDetails.getUsername(), todoRequestDto));
     }
 
+    @GetMapping("/{todoId}")
+    @Operation(summary = "특정 todo를 조회하는 API")
+    public ResponseEntity<TodoResponseDto> getTodo(
+            @Parameter(hidden = true) @AuthenticationPrincipal MemberDetailsImpl memberDetails,
+            @PathVariable Long todoId
+    ) {
+        return ResponseEntity.ok(todoService.getTodo(memberDetails.getUsername(), todoId));
+    }
+
     @GetMapping
     @Operation(summary = "모든 todo를 조회하는 API")
     public ResponseEntity<List<TodoResponseDto>> getTodos(

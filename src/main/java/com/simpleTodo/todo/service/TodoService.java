@@ -48,6 +48,19 @@ public class TodoService {
     }
 
     @Transactional
+    public TodoResponseDto getTodo(String memberName, Long todoId) {
+        Member member = memberRepository.findByMemberName(memberName).orElseThrow(
+                () -> new EntityNotFoundException(ErrorMessage.MEMBER_ACCESS_DENIED.getMessage())
+        );
+
+        Todo todo = todoRepository.findById(todoId).orElseThrow(
+                () -> new EntityNotFoundException(ErrorMessage.TODO_NOT_FOUND.getMessage())
+        );
+
+        return TodoResponseDto.create(member, todo);
+    }
+
+    @Transactional
     public TodoResponseDto updateTodo(String memberName, Long todoId, TodoRequestDto todoRequestDto) {
         Member member = memberRepository.findByMemberName(memberName).orElseThrow(
                 () -> new EntityNotFoundException(ErrorMessage.MEMBER_ACCESS_DENIED.getMessage())
