@@ -51,7 +51,7 @@ public class MemberController {
             )
     })
     public ResponseEntity<MemberResponseDto> login(
-            @RequestBody LoginRequestDto loginRequestDto,
+            @RequestBody @Valid LoginRequestDto loginRequestDto,
             @Parameter(hidden = true) HttpServletResponse response
     ) {
         return ResponseEntity.ok(memberService.login(loginRequestDto, response));
