@@ -5,14 +5,13 @@ import com.simpleTodo.common.jwt.JwtUtil;
 import com.simpleTodo.common.security.CustomAccessDeniedHandler;
 import com.simpleTodo.common.security.CustomAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.ArrayList;
@@ -36,18 +36,21 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
     private final JwtUtil jwtUtil;
 
+    @Value("${springdoc.swagger-ui.path}")
+    private String swaggerUiPath;
+
+    @Value("${springdoc.api-docs.path}")
+    private String swaggerApiDocsPath;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring()
-                .antMatchers("/swagger-ui/**", "/v3/api-docs/**","/docs")
-                .antMatchers("/version")
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    // TODO: 안정화되면 하기의 redirect 코드는 제거해야 함.
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/", swaggerUiPath);
     }
 
     @Bean
@@ -59,6 +62,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
         http.authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                .antMatchers(HttpMethod.GET, "/", swaggerUiPath, swaggerApiDocsPath + "/**", "/swagger-ui/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/members/member-name/duplicate").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/members/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/members/signup").permitAll()

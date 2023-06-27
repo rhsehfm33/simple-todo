@@ -39,8 +39,8 @@ jobs:
 
       - name: Set up application.properties & profile
         run: |
-          touch ./src/main/resources/application.properties; \
-          echo "${{ secrets.APPLICATION_SERVER_DEV }}" > ./src/main/resources/application.properties; \
+          touch ./src/main/resources/application-prod.properties; \
+          echo "${{ secrets.APPLICATION_PROD }}" > ./src/main/resources/application-prod.properties; \
 
       - name: Run chmod to make gradlew executable
         run: chmod +x ./gradlew
